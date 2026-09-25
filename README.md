@@ -1,206 +1,407 @@
+
 # 🍽️ Kartikesh Restaurant - Credit Management System
 
-A full-stack credit management system built for restaurants to digitally track customer credits (उधारी), payments, and generate reports — with Marathi language support.
+A full-stack web application for restaurants to digitally manage customer credits (उधारी), payments, and reports — with complete Marathi language support.
 
-![Java](https://img.shields.io/badge/Java-17-orange)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen)
-![React](https://img.shields.io/badge/React-18-blue)
-![MySQL](https://img.shields.io/badge/MySQL-8.x-blue)
-![Tailwind](https://img.shields.io/badge/Tailwind-3.x-38B2AC)
+---
+
+## 📌 About
+
+Traditional shopkeepers track customer credit in notebooks, leading to errors and lost payments. This system solves that by providing:
+
+- Digital credit tracking
+- Auto balance calculation
+- Payment reminders via WhatsApp
+- Business reports with PDF export
+- Complete data backup
 
 ---
 
 ## ✨ Features
 
-- 🔐 Single-owner PIN-based authentication with session management
-- 👥 Customer management (CRUD, search, village filter)
-- 💰 Credit & payment tracking with auto balance calculation
-- 📊 Real-time dashboard with business statistics
-- 📄 Reports — Daily, Monthly, Yearly, Pending, Customer-wise (PDF export)
-- 🔔 Smart reminders for overdue payments
-- 📱 WhatsApp reminder integration
-- 📸 File upload for transaction receipts
-- 💾 Complete data backup (ZIP with JSON + uploads)
-- 🌙 Dark mode with persistent preference
-- 🌐 Full Marathi language support
+| Feature | Description |
+|---------|-------------|
+| 🔐 **Authentication** | Single-owner registration with 4-digit PIN login |
+| 👥 **Customers** | Add, update, delete, search, filter by village |
+| 💰 **Transactions** | Track credit (उधारी) and payments (पैसे भरले) |
+| 📊 **Dashboard** | Real-time stats: customers, balance, transactions |
+| 📄 **Reports** | Daily, Monthly, Yearly, Pending, Customer-wise (PDF) |
+| 🔔 **Reminders** | Overdue payment alerts with WhatsApp integration |
+| 📸 **File Upload** | Attach receipts/photos to transactions |
+| 💾 **Backup** | Download complete data as ZIP file |
+| 🌙 **Dark Mode** | Toggle with persistent preference |
+| 🌐 **Marathi UI** | Full Marathi language throughout |
 
 ---
 
 ## 🛠️ Tech Stack
 
-**Backend:** Java 17, Spring Boot 3, Spring Data JPA, Hibernate, Spring Security, MySQL 8, iTextPDF, Maven
+**Backend**
+- Java 17
+- Spring Boot 3.x
+- Spring Data JPA + Hibernate
+- Spring Security
+- MySQL 8
+- iTextPDF (for PDF reports)
+- Maven
 
-**Frontend:** React 18, React Router v6, Zustand, Axios, Tailwind CSS 3, React Icons, React Hot Toast
+**Frontend**
+- React 18
+- React Router v6
+- Zustand (state management)
+- Axios (HTTP client)
+- Tailwind CSS 3
+- React Icons
+- React Hot Toast
 
 ---
 
 ## 📁 Project Structure
 
+```
+Kartikesh-Restaurant-Credit-Managment-System/
+│
+├── vyapari-mitra-backend/          # Spring Boot backend
+│   ├── src/main/java/.../
+│   │   ├── config/                 # Configurations
+│   │   ├── controller/             # REST controllers
+│   │   ├── dto/                    # Data transfer objects
+│   │   ├── exception/              # Error handling
+│   │   ├── model/                  # JPA entities
+│   │   ├── repository/             # Data access
+│   │   ├── security/               # Auth config
+│   │   ├── service/                # Business logic
+│   │   └── utils/                  # Utilities
+│   └── src/main/resources/
+│       └── application.properties
+│
+└── vyapari-mitra-frontend/         # React frontend
+    ├── public/
+    └── src/
+        ├── api/                    # Axios & endpoints
+        ├── components/             # Reusable components
+        ├── pages/                  # Page components
+        └── store/                  # Zustand stores
+```
+
 ---
 
-## 🚀 Getting Started
+## 🚀 Setup & Installation
 
 ### Prerequisites
-- Java 17+
+
+- Java 17 or higher
 - Maven 3.8+
 - MySQL 8+
 - Node.js 18+
 
+---
+
 ### Backend Setup
 
-bash
+**1. Navigate to backend**
+```bash
 cd vyapari-mitra-backend
+```
 
-Create src/main/resources/application.properties:
-
+**2. Create `src/main/resources/application.properties`**
+```properties
+# Server
 server.port=8080
+
+# Database (auto-creates DB if not exists)
 spring.datasource.url=jdbc:mysql://localhost:3306/vyapari_mitra_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata
 spring.datasource.username=root
-spring.datasource.password=your_password
+spring.datasource.password=YOUR_PASSWORD
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
+# JPA / Hibernate
 spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 
+# File Upload
 file.upload-dir=uploads/
 spring.servlet.multipart.max-file-size=10MB
 spring.servlet.multipart.max-request-size=10MB
 
+# Backup
 backup.dir=backups
+```
 
-
-Run:
-
-bash
+**3. Run the backend**
+```bash
 mvn spring-boot:run
-Backend runs at: http://localhost:8080
-Swagger UI: http://localhost:8080/swagger-ui.html
+```
 
-Frontend Setup
-bash
+**Backend URL:** `http://localhost:8080`
+**Swagger UI:** `http://localhost:8080/swagger-ui.html`
+
+---
+
+### Frontend Setup
+
+**1. Navigate to frontend**
+```bash
 cd vyapari-mitra-frontend
+```
+
+**2. Install dependencies**
+```bash
 npm install
-Create .env:
+```
 
-env
+**3. Create `.env` file**
+```env
 REACT_APP_API_URL=http://localhost:8080
-Run:
+```
 
-bash
+**4. Run the frontend**
+```bash
 npm start
-Frontend runs at: http://localhost:3000
+```
 
-📡 API Endpoints (Summary)
-Category	Base Path
-Authentication	/api/auth
-Customers	/api/customers
-Transactions	/api/transactions
-Dashboard	/api/dashboard
-Reports	/api/reports
-Reminders	/api/reminders
-Files	/api/files
-Search	/api/search
-Settings	/api/settings
+**Frontend URL:** `http://localhost:3000`
 
-📡 API Endpoints
-🔐 Authentication (/api/auth)
-Method	Endpoint	Description
-POST	/register	Register shop owner (one-time)
-POST	/login	Login with mobile + PIN
-GET	/check-owner	Check if owner exists
-GET	/owner-details	Get current owner details
+---
 
-👥 Customers (/api/customers)
-Method	Endpoint	Description
-POST	/	Create customer
-GET	/	Get all customers
-GET	/{id}	Get customer by ID
-PUT	/{id}	Update customer
-DELETE	/{id}	Delete customer
-GET	/search?keyword=	Search customers
-GET	/balance	Customers with pending balance
-GET	/village/{village}	Filter by village
-GET	/count	Total customer count
+## 📡 API Endpoints
 
-💰 Transactions (/api/transactions)
-Method	Endpoint	Description
-POST	/credit	Add credit (उधारी)
-POST	/payment	Add payment
-GET	/customer/{id}	Customer transactions
-GET	/{id}	Get transaction by ID
-GET	/today	Today's transactions
-GET	/pending	Pending payments
-GET	/between?start=&end=	Date range filter
-GET	/type/{type}	Filter by CREDIT/PAYMENT
-GET	/balance/{customerId}	Customer balance
-DELETE	/{id}	Delete transaction
+### 🔐 Authentication
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register owner (one-time only) |
+| POST | `/api/auth/login` | Login with mobile + PIN |
+| GET | `/api/auth/check-owner` | Check if owner exists |
+| GET | `/api/auth/owner-details` | Get current owner |
 
-📊 Dashboard (/api/dashboard)
-Method	Endpoint	Description
-GET	/home	Full dashboard data
-GET	/stats	Quick stats
+### 👥 Customers
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/customers` | Create customer |
+| GET | `/api/customers` | Get all customers |
+| GET | `/api/customers/{id}` | Get customer by ID |
+| PUT | `/api/customers/{id}` | Update customer |
+| DELETE | `/api/customers/{id}` | Delete customer |
+| GET | `/api/customers/search?keyword=` | Search customers |
+| GET | `/api/customers/balance` | Customers with balance |
+| GET | `/api/customers/village/{village}` | Filter by village |
 
-📄 Reports (/api/reports)
-Method	Endpoint	Description
-GET	/daily?date=	Daily report
-GET	/monthly?year=&month=	Monthly report
-GET	/yearly?year=	Yearly report
-GET	/pending	Pending payments report
-GET	/customer/{id}	Customer report
+### 💰 Transactions
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/transactions/credit` | Add credit (उधारी) |
+| POST | `/api/transactions/payment` | Add payment |
+| GET | `/api/transactions/customer/{id}` | Customer transactions |
+| GET | `/api/transactions/today` | Today's transactions |
+| GET | `/api/transactions/pending` | Pending payments |
+| GET | `/api/transactions/between?start=&end=` | Date range |
+| GET | `/api/transactions/balance/{id}` | Customer balance |
+| DELETE | `/api/transactions/{id}` | Delete transaction |
 
-🔔 Reminders (/api/reminders)
-Method	Endpoint	Description
-GET	/today	Today's reminders
-GET	/week	This week's reminders
+### 📊 Dashboard
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/dashboard/home` | Full dashboard data |
+| GET | `/api/dashboard/stats` | Quick statistics |
 
-📁 Files (/api/files)
-Method	Endpoint	Description
-POST	/upload	Upload file
-POST	/upload/transaction/{id}	Upload for transaction
-GET	/view/{fileName}	View file
-DELETE	/delete/{fileName}	Delete file
+### 📄 Reports
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/reports/daily?date=` | Daily report |
+| GET | `/api/reports/monthly?year=&month=` | Monthly report |
+| GET | `/api/reports/yearly?year=` | Yearly report |
+| GET | `/api/reports/pending` | Pending report |
+| GET | `/api/reports/customer/{id}` | Customer report |
 
-🔍 Search (/api/search)
-Method	Endpoint	Description
-GET	?keyword=	Global search
-GET	/quick?keyword=	Quick search
-⚙️ Settings (/api/settings)
-Method	Endpoint	Description
-GET	/shop	Get shop details
-PUT	/shop	Update shop details
-PUT	/pin	Change PIN
-GET	/storage	Storage info
-POST	/backup	Create backup
-GET	/backup/list	List backups
-GET	/backup/download/{file}	Download backup
-DELETE	/backup/{file}	Delete backup
+### 🔔 Reminders
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/reminders/today` | Today's reminders |
+| GET | `/api/reminders/week` | This week's reminders |
 
+### 📁 Files
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/files/upload` | Upload file |
+| POST | `/api/files/upload/transaction/{id}` | Upload for transaction |
+| GET | `/api/files/view/{fileName}` | View file |
+| DELETE | `/api/files/delete/{fileName}` | Delete file |
 
+### ⚙️ Settings
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/settings/shop` | Get shop details |
+| PUT | `/api/settings/shop` | Update shop |
+| PUT | `/api/settings/pin` | Change PIN |
+| POST | `/api/settings/backup` | Create backup |
+| GET | `/api/settings/backup/list` | List backups |
+| GET | `/api/settings/backup/download/{file}` | Download backup |
+| DELETE | `/api/settings/backup/{file}` | Delete backup |
 
+---
 
+## 🗄️ Database Schema
 
+### `owners`
+| Column | Type | Notes |
+|--------|------|-------|
+| id | BIGINT | Primary Key |
+| shop_name | VARCHAR(100) | Required |
+| owner_name | VARCHAR(100) | Required |
+| mobile | VARCHAR(10) | Unique, Required |
+| pin | VARCHAR(4) | Required |
+| registered_at | DATETIME | Auto |
 
-🗄️ Database Schema
-owners — id, shop_name, owner_name, mobile, pin, registered_at
+### `customers`
+| Column | Type | Notes |
+|--------|------|-------|
+| id | BIGINT | Primary Key |
+| owner_id | BIGINT | FK → owners.id |
+| name | VARCHAR(100) | Required |
+| mobile | VARCHAR(10) | Optional |
+| address | TEXT | Optional |
+| village | VARCHAR(50) | Optional |
+| total_credit | DECIMAL(15,2) | Auto-calculated |
+| total_paid | DECIMAL(15,2) | Auto-calculated |
+| balance | DECIMAL(15,2) | Auto-calculated |
+| last_transaction_date | DATETIME | Auto |
+| created_at | DATETIME | Auto |
 
-customers — id, owner_id (FK), name, mobile, address, village, total_credit, total_paid, balance, last_transaction_date, created_at
+### `transactions`
+| Column | Type | Notes |
+|--------|------|-------|
+| id | BIGINT | Primary Key |
+| customer_id | BIGINT | FK → customers.id |
+| owner_id | BIGINT | FK → owners.id |
+| type | VARCHAR(10) | CREDIT or PAYMENT |
+| amount | DECIMAL(15,2) | Required |
+| transaction_date | DATE | Required |
+| due_date | DATE | Optional |
+| description | TEXT | Optional |
+| photo_path | VARCHAR(255) | Optional |
+| created_at | DATETIME | Auto |
 
-transactions — id, customer_id (FK), owner_id (FK), type (CREDIT/PAYMENT), amount, transaction_date, due_date, description, photo_path, created_at
+> **Note:** Database and tables are auto-created on first run.
 
-Database and tables are auto-created on first run via createDatabaseIfNotExist=true and ddl-auto=update.
+---
 
-📄 License
-MIT License — Copyright (c) 2026 Kartikesh Kolekar
+## 🔑 How to Use
 
-📞 Contact
-Kartikesh Kolekar
+### First Time Setup
 
-GitHub: @KartikesKolekar01
+1. Open `http://localhost:3000`
+2. Click **Register** (only once)
+3. Fill in:
+   - Shop Name
+   - Owner Name
+   - Mobile (10 digits)
+   - PIN (4 digits)
+4. Login with Mobile + PIN
 
+### Daily Usage
 
+1. **Add Customer** → Customers page → "नवीन ग्राहक"
+2. **Add Credit** → Transactions → "उधारी" (credit)
+3. **Add Payment** → Transactions → "पैसे भरले" (payment)
+4. **Check Dashboard** → View all stats
+5. **Send Reminders** → Customers page → WhatsApp icon
+6. **Generate Reports** → Reports page → Select type → Generate
+7. **Backup Data** → Settings → "बॅकअप तयार करा"
 
+---
 
+## 📸 Screenshots
 
+### Dashboard
+![Dashboard](docs/screenshots/dashboard.png)
 
+### Customers
+![Customers](docs/screenshots/customers.png)
 
+### Transactions
+![Transactions](docs/screenshots/transactions.png)
+
+### Reports
+![Reports](docs/screenshots/reports.png)
+
+> Add your screenshots in `docs/screenshots/` folder.
+
+---
+
+## 🚀 Deployment
+
+### Backend — Build JAR
+```bash
+cd vyapari-mitra-backend
+mvn clean package
+java -jar target/*.jar
+```
+
+### Frontend — Build for production
+```bash
+cd vyapari-mitra-frontend
+npm run build
+```
+
+Deploy the `build/` folder to Netlify, Vercel, or any static host.
+
+---
+
+## 📋 Roadmap
+
+### ✅ Completed
+- [x] Single-owner registration
+- [x] PIN-based authentication
+- [x] Customer management (CRUD)
+- [x] Credit/Payment tracking
+- [x] Dashboard with stats
+- [x] Reports (Daily/Monthly/Yearly/Pending/Customer)
+- [x] WhatsApp reminders
+- [x] File uploads
+- [x] Backup system
+- [x] Dark mode
+- [x] Marathi language
+
+### 🚧 Future Plans
+- [ ] Dashboard charts
+- [ ] Print bill feature
+- [ ] Excel export
+- [ ] SMS notifications
+- [ ] Cloud backup
+- [ ] Mobile app
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+```
+MIT License
+
+Copyright (c) 2026 Kartikesh Kolekar
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction.
+```
+
+---
+
+## 📞 Contact
+
+**Kartikesh Kolekar**
+
+- GitHub: [@KartikesKolekar01](https://github.com/KartikesKolekar01)
+- Email: your-email@gmail.com
+
+**Repository:** [Kartikesh-Restaurant-Credit-Management-System](https://github.com/KartikesKolekar01/Kartikesh-Restaurant-Credit-Management-System)
+
+---
+
+<div align="center">
+
+### 🍽️ कार्तिकेश रेस्टॉरंट 🍽️
+**हिशोब सोपा, व्यवसाय सुरेख!**
 
