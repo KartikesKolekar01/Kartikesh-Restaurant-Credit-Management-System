@@ -1,0 +1,63 @@
+cd "C:\Users\HP\Downloads\Kartikesh-Restaurant-Credit-Management-System"
+
+@"
+# ============================================
+# Backend (Spring Boot)
+# ============================================
+vyapari-mitra-backend/target/
+vyapari-mitra-backend/.mvn/
+vyapari-mitra-backend/mvnw
+vyapari-mitra-backend/mvnw.cmd
+vyapari-mitra-backend/logs/
+vyapari-mitra-backend/uploads/
+vyapari-mitra-backend/backups/
+vyapari-mitra-backend/*.log
+
+# ============================================
+# Frontend (React)
+# ============================================
+vyapari-mitra-frontend/node_modules/
+vyapari-mitra-frontend/build/
+vyapari-mitra-frontend/dist/
+vyapari-mitra-frontend/.env
+vyapari-mitra-frontend/.env.local
+
+# ============================================
+# IDE
+# ============================================
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+
+# ============================================
+# OS
+# ============================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============================================
+# Sensitive Data
+# ============================================
+*.env
+application-local.properties
+secrets.properties
+
+# ============================================
+# Logs
+# ============================================
+*.log
+logs/
+
+# ============================================
+# Temporary
+# ============================================
+*.tmp
+*.bak
+*.swp
+"@ | Out-File -FilePath ".gitignore" -Encoding utf8
